@@ -1,65 +1,91 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { hexToCSSFilter } from "hex-to-css-filter";
-import SVG from 'react-inlinesvg';
-import useImage from 'use-image';
-// import getSVGColors from 'get-svg-color-browser.es.js';
-import getSvgColors from 'get-svg-colors';
-import './svg-page.css';
+import SVG from "react-inlinesvg";
+import useImage from "use-image";
+/* eslint-disable */
+import getColors from "get-svg-colors";
+
+
+import "./svg-page.css";
+import axios from "axios";
+const svgIcon = '<svg width="93" height="18" viewBox="0 0 93 18" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M5.746 17.26C4.93133 17.26 4.26833 17.0953 3.757 16.766C3.24567 16.428 2.86867 15.999 2.626 15.479C2.38333 14.959 2.262 14.4173 2.262 13.854V6.652H0.416L0.702 4H2.262V1.14L5.486 0.801999V4H8.346V6.652H5.486V12.528C5.486 13.1867 5.525 13.6633 5.603 13.958C5.681 14.244 5.85867 14.426 6.136 14.504C6.41333 14.5733 6.85533 14.608 7.462 14.608H8.346L8.06 17.26H5.746ZM20.6115 17.26C19.0428 17.26 17.7342 16.948 16.6855 16.324C15.6455 15.6913 14.8655 14.8593 14.3455 13.828C13.8255 12.788 13.5655 11.6527 13.5655 10.422C13.5655 9.23467 13.8082 8.13833 14.2935 7.133C14.7875 6.12767 15.5068 5.32167 16.4515 4.715C17.3962 4.09967 18.5488 3.792 19.9095 3.792C21.1575 3.792 22.1975 4.04767 23.0295 4.559C23.8615 5.07033 24.4855 5.755 24.9015 6.613C25.3175 7.46233 25.5255 8.40267 25.5255 9.434C25.5255 9.72 25.5082 10.0103 25.4735 10.305C25.4388 10.591 25.3868 10.89 25.3175 11.202H16.9195C17.0408 12.008 17.2922 12.6623 17.6735 13.165C18.0635 13.659 18.5358 14.023 19.0905 14.257C19.6538 14.491 20.2562 14.608 20.8975 14.608C21.6515 14.608 22.3535 14.5127 23.0035 14.322C23.6535 14.1227 24.2515 13.8627 24.7975 13.542L24.9535 16.272C24.4595 16.532 23.8442 16.7617 23.1075 16.961C22.3708 17.1603 21.5388 17.26 20.6115 17.26ZM16.9975 9.018H22.2495C22.2495 8.628 22.1758 8.238 22.0285 7.848C21.8812 7.44933 21.6342 7.11567 21.2875 6.847C20.9495 6.57833 20.4902 6.444 19.9095 6.444C19.0775 6.444 18.4232 6.68667 17.9465 7.172C17.4698 7.65733 17.1535 8.27267 16.9975 9.018ZM34.4344 17.26C33.741 17.26 33.1084 17.1083 32.5364 16.805C31.9644 16.493 31.5094 16.0467 31.1714 15.466C30.8334 14.8853 30.6644 14.1833 30.6644 13.36C30.6644 12.6233 30.8334 11.995 31.1714 11.475C31.518 10.9463 31.9687 10.5087 32.5234 10.162C33.0867 9.80667 33.6934 9.52933 34.3434 9.33C35.002 9.122 35.6477 8.97033 36.2804 8.875C36.9217 8.77967 37.485 8.72333 37.9704 8.706C37.9357 7.96067 37.745 7.419 37.3984 7.081C37.0517 6.743 36.4624 6.574 35.6304 6.574C35.0497 6.574 34.482 6.65633 33.9274 6.821C33.3814 6.977 32.7617 7.224 32.0684 7.562L31.7824 4.936C32.5624 4.55467 33.3424 4.26867 34.1224 4.078C34.911 3.88733 35.7084 3.792 36.5144 3.792C37.485 3.792 38.3214 3.96533 39.0234 4.312C39.7254 4.65867 40.267 5.21767 40.6484 5.989C41.0297 6.75167 41.2204 7.76133 41.2204 9.018V12.528C41.2204 13.178 41.2507 13.6503 41.3114 13.945C41.372 14.231 41.4847 14.413 41.6494 14.491C41.814 14.569 42.0524 14.608 42.3644 14.608H42.7804L42.4944 17.26H41.3244C40.839 17.26 40.4057 17.195 40.0244 17.065C39.6517 16.9437 39.331 16.7703 39.0624 16.545C38.7937 16.3197 38.577 16.0553 38.4124 15.752C37.9877 16.2287 37.4114 16.6013 36.6834 16.87C35.964 17.13 35.2144 17.26 34.4344 17.26ZM35.7864 14.79C36.0724 14.79 36.4277 14.7163 36.8524 14.569C37.277 14.413 37.6584 14.1747 37.9964 13.854V10.89C37.3897 10.916 36.783 11.0157 36.1764 11.189C35.5697 11.3623 35.0627 11.618 34.6554 11.956C34.248 12.294 34.0444 12.7187 34.0444 13.23C34.0444 13.7587 34.183 14.153 34.4604 14.413C34.7377 14.6643 35.1797 14.79 35.7864 14.79ZM48.4756 17V4H51.2316L51.4396 5.898L50.9716 5.326C51.4656 4.936 52.0549 4.585 52.7396 4.273C53.4329 3.95233 54.2389 3.792 55.1576 3.792C55.8509 3.792 56.4619 3.896 56.9906 4.104C57.5279 4.30333 57.9872 4.59367 58.3686 4.975C58.7499 5.34767 59.0576 5.794 59.2916 6.314L58.5116 6.132C58.9276 5.38667 59.5342 4.81033 60.3316 4.403C61.1376 3.99567 62.0476 3.792 63.0616 3.792C64.2576 3.792 65.2326 4.039 65.9866 4.533C66.7406 5.027 67.2952 5.72467 67.6506 6.626C68.0059 7.51867 68.1836 8.56733 68.1836 9.772V17H64.9596V10.006C64.9596 8.79267 64.7689 7.89567 64.3876 7.315C64.0149 6.73433 63.3909 6.444 62.5156 6.444C62.0822 6.444 61.7009 6.522 61.3716 6.678C61.0509 6.82533 60.7822 7.04633 60.5656 7.341C60.3576 7.627 60.2016 7.978 60.0976 8.394C59.9936 8.80133 59.9416 9.26067 59.9416 9.772V17H56.7176V10.006C56.7176 9.2 56.6309 8.53267 56.4576 8.004C56.2929 7.47533 56.0242 7.08533 55.6516 6.834C55.2876 6.574 54.8109 6.444 54.2216 6.444C53.4676 6.444 52.8479 6.62167 52.3626 6.977C51.8859 7.32367 51.4656 7.796 51.1016 8.394L51.6996 6.652V17H48.4756ZM78.6652 17.26C77.8072 17.26 77.0316 17.1777 76.3382 17.013C75.6536 16.8483 74.9646 16.61 74.2712 16.298L74.5572 13.542C75.2246 13.932 75.8789 14.2483 76.5202 14.491C77.1702 14.725 77.8506 14.842 78.5612 14.842C79.2026 14.842 79.6922 14.738 80.0302 14.53C80.3682 14.322 80.5372 13.9927 80.5372 13.542C80.5372 13.204 80.4462 12.9267 80.2642 12.71C80.0909 12.4933 79.8266 12.2983 79.4712 12.125C79.1159 11.9517 78.6739 11.7653 78.1452 11.566C77.3479 11.2713 76.6676 10.9507 76.1042 10.604C75.5496 10.2573 75.1249 9.84133 74.8302 9.356C74.5442 8.862 74.4012 8.25533 74.4012 7.536C74.4012 6.79067 74.5962 6.132 74.9862 5.56C75.3762 4.988 75.9309 4.54167 76.6502 4.221C77.3696 3.90033 78.2232 3.74 79.2112 3.74C80.0346 3.74 80.7712 3.831 81.4212 4.013C82.0799 4.195 82.6866 4.442 83.2412 4.754L82.9552 7.51C82.3746 7.10267 81.7896 6.769 81.2002 6.509C80.6109 6.24033 79.9652 6.106 79.2632 6.106C78.7086 6.106 78.2796 6.21867 77.9762 6.444C77.6729 6.66933 77.5212 6.99 77.5212 7.406C77.5212 7.90867 77.7336 8.28567 78.1582 8.537C78.5829 8.78833 79.2632 9.096 80.1992 9.46C80.8059 9.694 81.3302 9.93667 81.7722 10.188C82.2229 10.4393 82.5956 10.7167 82.8902 11.02C83.1849 11.3233 83.4016 11.67 83.5402 12.06C83.6876 12.4413 83.7612 12.8833 83.7612 13.386C83.7612 14.2093 83.5619 14.9113 83.1632 15.492C82.7732 16.064 82.1969 16.5017 81.4342 16.805C80.6802 17.1083 79.7572 17.26 78.6652 17.26Z" fill="#324162"/><path d="M89.5554 17V13.464H92.9354V17H89.5554Z" fill="#2DD4BF"/></svg>'
 
 const SvgColorEditor = () => {
+  const [svgFile, setSvg] = useState();
+  const [hexColor, setHexColor] = useState("#000");
+  const [url, setNewUrl] = useState(svgFile);
+  const [svgImage, setSvgImage] = useState(null);
 
-    const [svgFile, setSvg] = useState();
-    const [hexColor, setHexColor] = useState("#000");
-    const [url, setNewUrl] = useState(svgFile);
+ 
+  const [image] = useImage("data:image/svg+xml;base64" + window.btoa(url));
+  const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const [colorPickerSelectedColor, setColorPickerSelectedColor] =
+    useState("#ffffff");
 
-    const [image] = useImage('data:image/svg+xml;base64'+ window.btoa(url));
-    const [displayColorPicker, setDisplayColorPicker] = useState(false);
-    const [colorPickerSelectedColor, setColorPickerSelectedColor] = useState('#ffffff');
 
-   // Color choosen from uploaded svg
-    const colors = getSvgColors(url, {flat: true});
-  
-    //  var regx = /#[0-9a-f]{3,6}/gi;
-    //  var str = svgFile.match(regx);
-    //  console.log(str)
-    //  var colors = str;
-    const allColors = colors.map((color)=> color.hex());
-    console.log("allColors",allColors);
-    const uniqueColors = Array.from(new Set(allColors));
 
-    const handleChange = (e) => {
-        e.preventDefault();
-        let reader = new FileReader();
-        let fileValue = e.target.files[0];
-        reader.onloadend = () => {
-            setSvg(reader.result);
-        }
+  // const handleChange = (e) => {
+  //   e.preventDefault();
+  //   let reader = new FileReader();
+  //   let fileValue = e.target.files[0];
+  //   reader.onloadend = () => {
+  //     setSvg(reader.result);
+  //   };
+  //   reader.readAsDataURL(fileValue);
 
-        reader.readAsDataURL(fileValue)
-    }
-    let cssFilterValue = "";
-    const cssFilter = hexToCSSFilter(hexColor, {
-        acceptanceLossPercentage: 1,
-        maxChecks: 10
-    });
-    cssFilterValue = cssFilter.filter.replace(";", "");
-    return (
-        <div className='container'>
-            Muruga
-            <input type='file' onChange={handleChange} accept=".svg" />
-            {svgFile &&
-            <>
-                <SVG src={svgFile} style={{ filter: `${cssFilterValue}` }}/>
-                <input
-                name="color-picker"
-                aria-label="icon-color-picker"
-                type="color"
-                value={hexColor}
-                onChange={(e) => setHexColor(e.target.value)}
-            />
-            </>
-            }
-        </div>
-    )
-}
+  //   const svgw = url;
+  //  const colors = getColors(url);
+  // };
+
+  let cssFilterValue = "";
+  const cssFilter = hexToCSSFilter(hexColor, {
+    acceptanceLossPercentage: 1,
+    maxChecks: 10,
+  }); 
+  cssFilterValue = cssFilter.filter.replace(";", "");
+
+ 
+  const handleUpload = () => {
+    axios.post('http://localhost:4000/image-upload', svgImage)
+    .then(res => {
+      console.log('Axios response: ', res)
+    })
+    // const svges = require.context('./assets', true);
+    // let animal = svges(`./${someVariable}.svg`);
+    // console.log("svgsss",animal)
+  }
+
+  const handleFileInput = (e) => {
+    // e.preventDefault();
+    // let reader = new FileReader();
+    // let fileValue = e.target.files[0];
+    // reader.onloadend = () => {
+    //     setSvg(reader.result);
+    // }
+    // reader.readAsDataURL(fileValue)
+
+    const formData = new FormData(); 
+    formData.append('my-image-file', e.target.files[0], e.target.files[0].name);
+    setSvgImage(formData);
+  }
+  return (
+    <div className="container">
+      <input type="file" onChange={handleFileInput} accept=".svg" />
+      <button onClick={handleUpload} >Upload</button>
+
+      {svgFile && (
+        <>
+          <SVG src={svgFile}  />
+          <input
+            name="color-picker"
+            aria-label="icon-color-picker"
+            type="color"
+            value={hexColor}
+            onChange={(e) => setHexColor(e.target.value)}
+          />
+        </>
+      )}
+    </div>
+  );
+};
 export default SvgColorEditor;

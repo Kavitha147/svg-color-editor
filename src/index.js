@@ -10,6 +10,7 @@ root.render(
   <React.StrictMode>
     {/* <Home /> */}
     <SvgColorEditor />
+    
   </React.StrictMode>
 );
 
